@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import sqlite3, json, datetime
-
+import os
 app = Flask(__name__)
 CORS(app)
 
@@ -88,5 +88,7 @@ def search():
                and p["price"] <= price]
     return jsonify(results)
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))  
+    app.run(host="0.0.0.0", port=port)
